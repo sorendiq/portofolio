@@ -1,0 +1,10 @@
+#5F8670 / 
+#FF9800 / orange
+#B80000 / Merah
+#820300 / maroon
+
+------------------
+#F2E8C6 / putih
+#DAD4B5 / abu
+#A73121 / merah
+#952323 / maroon
