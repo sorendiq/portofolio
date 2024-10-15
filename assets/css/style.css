@@ -14,20 +14,22 @@ body {
 .container {
     width: 100%;
     min-height: 10vh;
-    background-color: #F2E8C6; 
+    background-color: #F2E8C6;
 }
 
 nav {
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between; /* Space between logo and nav items */
+    align-items: center; /* Align items vertically */
     height: 80px;
     line-height: 80px;
+    padding: 0 20px; /* Add some padding */
     z-index: 111;
 }
 
 .logo {
-    display: flex;
     font-size: 40px;
     font-weight: 800;
     color: #952323;
@@ -35,13 +37,9 @@ nav {
     text-transform: uppercase;
 }
 
-b {
-    font-size: 70px;
-    color: #A73121;
-}
-
 .navItems {
     display: flex;
+    flex-wrap: wrap; /* Allow wrapping of nav items */
 }
 
 .navItems li {
@@ -62,63 +60,29 @@ b {
     color: #952323;
 }
 
+.links {
+    display: flex; /* Display links in a row */
+}
+
 .links a {
     font-size: 30px;
     color: #DAD4B5;
-    margin: 25px 10px; /* Perbaiki dari "marhin" ke "margin" */
+    margin-left: 15px; /* Spacing between icons */
 }
 
 .wrapper {
     display: flex;
+    flex-direction: row; /* Default to row for larger screens */
     width: 100%;
     height: calc(100vh - 80px);
     justify-content: center;
     align-items: center;
     padding: 0 10%;
-    position: relative; /* Tambahkan posisi relatif untuk ::before dan ::after */
     overflow: hidden;
 }
 
-.wrapper::before {
-    position: absolute;
-    content: '';
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    left: 35%;
-    top: 12%;
-    background: linear-gradient(45deg, #952323, black);
-    animation: object1 6s linear infinite;
-}
-
-.wrapper::after {
-    position: absolute;
-    content: '';
-    height: 600px;
-    width: 600px;
-    border-radius: 50%;
-    left: -12%;
-    top: 40%;
-    background: linear-gradient(45deg, #952323, black);
-    animation: object2 6s linear infinite;
-}
-
-@keyframes object1 {
-    50% {
-        left: -13%;
-        top: 40%;
-    }
-}
-
-@keyframes object2 {
-    50% {
-        left: 35%;
-        top: 10%;
-    }
-}
-
 .cols {
-    width: 50%;
+    width: 50%; /* Default width for columns */
 }
 
 .cols0 {
@@ -144,7 +108,7 @@ b {
 }
 
 h1 {
-    display: block; /* Perbaiki dari "displayL" ke "display" */
+    display: block;
     font-size: 7em;
     font-weight: 900;
     color: #DAD4B5;
@@ -165,8 +129,73 @@ p {
 .btns {
     width: 100%;
     position: relative;
-    left: 150px;
+    left: 0; /* Reset button positioning */
+    display: flex; /* Flex display for buttons */
+    justify-content: space-between; /* Space between buttons */
 }
+
+.wrapper {
+    position: relative; /* Make wrapper position relative for absolute positioning of circles */
+    display: flex;
+    flex-direction: row; /* Default to row for larger screens */
+    width: 100%;
+    height: calc(100vh - 80px);
+    justify-content: center;
+    align-items: center;
+    padding: 0 10%;
+    overflow: hidden;
+}
+
+.wrapper::before {
+    position: absolute;
+    content: '';
+    height: 200px;
+    width: 200px;
+    border-radius: 50%; /* Make it circular */
+    background: linear-gradient(45deg, #952323, black);
+    animation: circle1 6s linear infinite; /* Add animation */
+    left: 20%; /* Position it */
+    top: 10%; /* Position it */
+    z-index: 1; /* Make sure it stays behind the text */
+}
+
+.wrapper::after {
+    position: absolute;
+    content: '';
+    height: 400px; /* Increased size for second circle */
+    width: 400px;
+    border-radius: 50%; /* Make it circular */
+    background: linear-gradient(45deg, #A73121, black);
+    animation: circle2 6s linear infinite; /* Add animation */
+    right: 10%; /* Position it */
+    bottom: 10%; /* Position it */
+    z-index: 1; /* Make sure it stays behind the text */
+}
+
+@keyframes circle1 {
+    0% {
+        transform: scale(1); /* Start scale */
+    }
+    50% {
+        transform: scale(1.2); /* Scale up */
+    }
+    100% {
+        transform: scale(1); /* Scale back to normal */
+    }
+}
+
+@keyframes circle2 {
+    0% {
+        transform: rotate(0deg); /* Start rotation */
+    }
+    50% {
+        transform: rotate(180deg); /* Rotate */
+    }
+    100% {
+        transform: rotate(0deg); /* Back to starting rotation */
+    }
+}
+
 
 button {
     outline: none;
@@ -180,56 +209,74 @@ button {
     margin: 40px 5px;
     letter-spacing: 2px;
     text-transform: capitalize;
-    box-shadow: 0 15px 10px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.4);
 }
 
 button:hover {
     background-color: #A73121;
 }
 
-.imgbox {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.imgbox img {
-    position: absolute; /* Ganti dari relative ke absolute */
-    height: 100%;
-    width: calc(130% - 80px);
-    top: -100px;
-    right: 50px; /* Perbaiki dari "righht" ke "right" */
-    transform: rotateY(180deg);
-    animation: animateUser 4s linear infinite;
-}
-
-@keyframes animateUser {
-    0% {
-        transform: rotateY(180deg);
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+    nav {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: flex-start; /* Align to start */
     }
-    50% {
-        right: 30px;
-        top: -90px;
+
+    .navItems {
+        margin-top: 10px; /* Space between logo and nav items */
+    }
+
+    .wrapper {
+        flex-direction: column; /* Stack wrapper items vertically */
+        height: auto; /* Auto height for responsiveness */
+    }
+
+    .cols {
+        width: 100%; /* Full width for both sections */
+        text-align: center; /* Center text */
+    }
+
+    h1 {
+        font-size: 4em; /* Adjust font size */
+    }
+
+    p {
+        width: 100%; /* Full width for paragraph */
+    }
+
+    .btns {
+        flex-direction: column; /* Stack buttons vertically */
     }
 }
 
-.imgbox #splash {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(-35deg); /* Tambahkan "rotate" dalam transform */
-    width: 160%;
-    filter: saturate(200%);
-    animation: animate 4s linear infinite;
-}
-
-@keyframes animate {
-    0% {
-        transform: rotateY(180deg);
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 0 5%; /* Reduce padding on smaller screens */
     }
-    50% {
-        top: 48%;
-        left: 52%;
-        width: 156%;
+
+    .cols {
+        width: 100%; /* Full width for both sections */
+    }
+
+    .btns {
+        left: 0; /* Reset button positioning */
+    }
+
+    button {
+        width: 100%; /* Full width for buttons */
+        margin: 10px 0; /* Space between buttons */
+    }
+
+    h1 {
+        font-size: 3em; /* Smaller font size for mobile */
+    }
+
+    p {
+        font-size: 1em; /* Smaller paragraph font size for mobile */
+    }
+
+    .links a {
+        font-size: 20px; /* Adjust icon size */
     }
 }
